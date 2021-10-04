@@ -6,8 +6,14 @@ public class OwlBird : Bird
 {
     public Explosion explosionPrefab;
 
+    private bool _isExploded = false;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        if (!_isExploded)
+        {
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            _isExploded = true;
+        }
     }
 }
