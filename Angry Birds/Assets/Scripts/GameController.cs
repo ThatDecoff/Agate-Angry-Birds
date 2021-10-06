@@ -16,6 +16,8 @@ public class GameController : MonoBehaviour
     private Bird _shotBird;
     public BoxCollider2D TapCollider;
 
+    public Transform WinPanel;
+
     public event Action OnGameEnded;
 
     void Start()
@@ -68,6 +70,7 @@ public class GameController : MonoBehaviour
         if (Enemies.Count == 0)
         {
             _isGameEnded = true;
+            WinPanel.gameObject.SetActive(true);
             StartCoroutine("GameEnded");
         }
     }
