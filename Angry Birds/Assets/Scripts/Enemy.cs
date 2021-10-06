@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
 
     void OnDestroy()
     {
+        _isHit = true;
         if (_isHit)
         {
             OnEnemyDestroyed(gameObject);
