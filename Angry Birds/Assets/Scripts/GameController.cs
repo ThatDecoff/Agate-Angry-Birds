@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameController : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class GameController : MonoBehaviour
 
     private Bird _shotBird;
     public BoxCollider2D TapCollider;
+
+    public event Action OnGameEnded;
 
     void Start()
     {
@@ -65,6 +68,7 @@ public class GameController : MonoBehaviour
         if (Enemies.Count == 0)
         {
             _isGameEnded = true;
+            StartCoroutine("GameEnded");
         }
     }
 
@@ -80,6 +84,16 @@ public class GameController : MonoBehaviour
         if (_shotBird != null)
         {
             _shotBird.OnTap();
+        }
+    }
+
+    public IEnumerator GameEnded()
+    {
+        yield return new WaitForSeconds(2);
+        Debug.Log("Game Ended");
+        if(OnGameEnded != null)
+        {
+            OnGameEnded.Invoke();
         }
     }
 }
